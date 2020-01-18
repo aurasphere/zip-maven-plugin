@@ -10,14 +10,14 @@ Simple Maven plugin for generating ZIP files.
 ```
 <plugin>
   <groupId>co.aurasphere.maven.plugins</groupId>
-	<artifactId>zip-maven-plugin</artifactId>
-	<version>1.0.0</version>
+  <artifactId>zip-maven-plugin</artifactId>
+  <version>1.0.0</version>
   <extensions>true</extensions>
   <configuration>
-			<inputDirectory>${project.basedir}/src/main/java</inputDirectory>
-			<outputDirectory>C:/mydir</outputDirectory>
-			<zipName>my-zip-name</zipName>
-	</configuration>
+    <inputDirectory>${project.basedir}/src/main/java</inputDirectory>
+    <outputDirectory>C:/mydir</outputDirectory>
+    <zipName>my-zip-name</zipName>
+  </configuration>
 </plugin>
 ```
 
