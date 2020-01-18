@@ -27,6 +27,6 @@ Simple Maven plugin for generating ZIP files.
  
 3. The configuration element is optional. If not supplied, the default values are:
 
-- **inputDirectory**: `${project.build.outputDirectory}` (the target/classes directory)
-- **outputDirectory**: `${project.build.directory}` (the target directory)
-- **zipName**: `${project.build.finalName}` (<project-name>-<project-version>)
+- **inputDirectory**: `${project.build.outputDirectory}` (your project target/classes directory)
+- **outputDirectory**: `${project.build.directory}` (your project target directory)
+- **zipName**: `${project.build.finalName}` ([project-name]-[project-version])
