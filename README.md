@@ -1,4 +1,4 @@
-# zip-maven-plugin
+# Zip Maven Plugin
 Simple Maven plugin for generating ZIP files.
 
 ## Usage
@@ -30,3 +30,5 @@ Simple Maven plugin for generating ZIP files.
 - **inputDirectory**: `${project.build.outputDirectory}` (your project target/classes directory)
 - **outputDirectory**: `${project.build.directory}` (your project target directory)
 - **zipName**: `${project.build.finalName}` ([project-name]-[project-version])
+
+<sub>Copyright (c) 2019 Donato Rimenti</sub>
