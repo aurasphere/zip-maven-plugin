@@ -1,5 +1,5 @@
 [![Travis](https://img.shields.io/travis/aurasphere/zip-maven-plugin.svg)](https://travis-ci.org/aurasphere/zip-maven-plugin)
-[![Maven Central](https://img.shields.io/maven-central/v/co.aurasphere.maven.plugins/zip-maven-plugin.svg)](http://search.maven.org/#artifactdetails%7Cco.aurasphere.maven.plugins%zip-maven-plugin%7C1.0.0%7Cjar)
+[![Maven Central](https://img.shields.io/maven-central/v/co.aurasphere.maven.plugins/zip-maven-plugin.svg)](https://search.maven.org/artifact/co.aurasphere.maven.plugins/zip-maven-plugin/1.0.0/jar)
 [![Javadocs](http://javadoc.io/badge/co.aurasphere.maven.plugins/zip-maven-plugin.svg)](http://javadoc.io/doc/co.aurasphere.maven.plugins/zip-maven-plugin)
 [![Maintainability](https://api.codeclimate.com/v1/badges/43d564cf9ee6e93d8391/maintainability)](https://codeclimate.com/github/aurasphere/zip-maven-plugin/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/43d564cf9ee6e93d8391/test_coverage)](https://codeclimate.com/github/aurasphere/zip-maven-plugin/test_coverage)
