@@ -37,6 +37,7 @@ import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.mockito.internal.util.reflection.Whitebox;
 import org.zeroturnaround.zip.ZipException;
+import org.zeroturnaround.zip.ZipUtil;
 
 /**
  * Tests for {@link ZipMojo}.
@@ -139,5 +140,79 @@ public class ZipMojoTest {
 		// Checks that the zip has been succesfully created.
 		Assert.assertNotNull(artifact.getFile());
 	}
+
+    /**
+     * Tests {@link ZipMojo#execute()} by building a zip file without errors.
+     *
+     * @throws MojoExecutionException if an error occurs during the plugin execution
+     * @throws IOException            if an error occurs while creating temporary
+     *                                directories
+     */
+    @Test
+    public void testZipPreserveRootOk() throws MojoExecutionException, IOException {
+        // Creates a temporary file to zip. This is an assumption to the test.
+        File rootFolder = tempFolder.newFolder();
+        File inputFolder = new File(rootFolder, "inputFolder");
+        Assume.assumeTrue(inputFolder.mkdir());
+        File zipFile = new File(inputFolder, "zipFile");
+        Assume.assumeTrue(zipFile.createNewFile());
+
+        // Mocks the internal state.
+        MavenProject project = new MavenProject();
+        Artifact artifact = new ProjectArtifact(project);
+        project.setArtifact(artifact);
+        Whitebox.setInternalState(zipMojo, "inputDirectory", inputFolder);
+        Whitebox.setInternalState(zipMojo, "outputDirectory", tempFolder.getRoot());
+        Whitebox.setInternalState(zipMojo, "preserveRoot", true);
+        Whitebox.setInternalState(zipMojo, "project", project);
+
+        // Executes the plugin.
+        zipMojo.execute();
+
+        Assume.assumeTrue(zipFile.delete());
+        Assume.assumeTrue(inputFolder.delete());
+
+        // Checks that the zip has been successfully created.
+        Assert.assertNotNull(artifact.getFile());
+        ZipUtil.unpack(artifact.getFile(), rootFolder);
+        Assert.assertTrue(new File(rootFolder, "inputFolder").exists());
+    }
+
+    /**
+     * Tests {@link ZipMojo#execute()} by building a zip file without errors.
+     *
+     * @throws MojoExecutionException if an error occurs during the plugin execution
+     * @throws IOException            if an error occurs while creating temporary
+     *                                directories
+     */
+    @Test
+    public void testZipSetRootNameOk() throws MojoExecutionException, IOException {
+        // Creates a temporary file to zip. This is an assumption to the test.
+        File rootFolder = tempFolder.newFolder();
+        File inputFolder = new File(rootFolder, "inputFolder");
+        Assume.assumeTrue(inputFolder.mkdir());
+        File zipFile = new File(inputFolder, "zipFile");
+        Assume.assumeTrue(zipFile.createNewFile());
+
+        // Mocks the internal state.
+        MavenProject project = new MavenProject();
+        Artifact artifact = new ProjectArtifact(project);
+        project.setArtifact(artifact);
+        Whitebox.setInternalState(zipMojo, "inputDirectory", inputFolder);
+        Whitebox.setInternalState(zipMojo, "outputDirectory", tempFolder.getRoot());
+        Whitebox.setInternalState(zipMojo, "rootName", "alternativeRootName");
+        Whitebox.setInternalState(zipMojo, "project", project);
+
+        // Executes the plugin.
+        zipMojo.execute();
+
+        Assume.assumeTrue(zipFile.delete());
+        Assume.assumeTrue(inputFolder.delete());
+
+        // Checks that the zip has been successfully created.
+        Assert.assertNotNull(artifact.getFile());
+        ZipUtil.unpack(artifact.getFile(), rootFolder);
+        Assert.assertTrue(new File(rootFolder, "alternativeRootName").exists());
+    }
 
 }
