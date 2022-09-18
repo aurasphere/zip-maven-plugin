@@ -32,6 +32,7 @@ import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
 import org.apache.maven.project.MavenProject;
+import org.zeroturnaround.zip.NameMapper;
 import org.zeroturnaround.zip.ZipUtil;
 
 /**
@@ -71,6 +72,12 @@ public class ZipMojo extends AbstractMojo {
 	@Parameter(defaultValue = "${project.build.finalName}", property = "zipName")
 	private String zipName;
 
+    @Parameter(property = "preserveRoot")
+    private boolean preserveRoot;
+
+    @Parameter(property = "rootName")
+    private String rootName;
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -99,7 +106,16 @@ public class ZipMojo extends AbstractMojo {
 
 		// Builds the actual zip file.
 		File artifact = new File(outputDirectory, zipName + ".zip");
-		ZipUtil.pack(inputDirectory, artifact);
+
+        if (rootName == null || rootName.isBlank()) {
+		    ZipUtil.pack(inputDirectory, artifact, preserveRoot);
+        } else {
+		    ZipUtil.pack(inputDirectory, artifact, new NameMapper() {
+                public String map(String name) {
+                    return rootName + "/" + name;
+                }
+            });
+        }
 
 		// Sets the artifact file inside the project.
 		project.getArtifact().setFile(artifact);
