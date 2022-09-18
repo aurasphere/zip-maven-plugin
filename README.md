@@ -26,6 +26,7 @@ Simple Maven plugin for generating ZIP files.
     <inputDirectory>${project.basedir}/src/main/java</inputDirectory>
     <outputDirectory>C:/mydir</outputDirectory>
     <preserveRoot>true</preserveRoot>
+    <rootName>my-root-name</rootName>
     <zipName>my-zip-name</zipName>
   </configuration>
 </plugin>
