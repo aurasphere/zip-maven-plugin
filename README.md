@@ -25,6 +25,7 @@ Simple Maven plugin for generating ZIP files.
   <configuration>
     <inputDirectory>${project.basedir}/src/main/java</inputDirectory>
     <outputDirectory>C:/mydir</outputDirectory>
+    <preserveRoot>true</preserveRoot>
     <zipName>my-zip-name</zipName>
   </configuration>
 </plugin>
@@ -38,6 +39,8 @@ Simple Maven plugin for generating ZIP files.
 
 - **inputDirectory**: `${project.build.outputDirectory}` (your project target/classes directory)
 - **outputDirectory**: `${project.build.directory}` (your project target directory)
+- **preserveRoot**: `false` (if true, will use the input directory name as the root of the zip, if false will use [project-name]-[project-version])
+- **rootName**: `${project.build.finalName}` (the name to use as the root of the zip, if provided it will cause `preserveRoot` element to be ignored)
 - **zipName**: `${project.build.finalName}` ([project-name]-[project-version])
 
 <sub>Copyright (c) 2019 Donato Rimenti</sub>
